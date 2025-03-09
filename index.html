@@ -18,7 +18,7 @@
         }
         #linkContainer {
             font-size: 24px;
-            height: 40px; /* Fixná výška riadku */
+            height: 40px; /* Výška riadku */
             width: auto; /* Šírka podľa textu */
             overflow: hidden;
             position: relative;
@@ -26,23 +26,21 @@
             justify-content: center;
             align-items: center;
         }
-        #rotatingLink {
+        .rotatingLink {
             text-decoration: none;
             color: black;
             font-weight: bold;
-            display: inline-block;
             position: absolute;
+            white-space: nowrap;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.5s ease, transform 0.5s ease;
-            background: transparent; /* Priesvitné pozadie */
-            padding: 5px 10px; /* Padding len na lepšiu čitateľnosť */
         }
     </style>
 </head>
 <body>
     <div id="linkContainer">
-        <a id="rotatingLink" href="#" target="_blank">Načítavam...</a>
+        <a id="rotatingLink" href="#" target="_blank" class="rotatingLink">Načítavam...</a>
     </div>
 
     <script>
@@ -53,26 +51,34 @@
         ];
 
         let index = 0;
-        const linkElement = document.getElementById("rotatingLink");
+        const linkContainer = document.getElementById("linkContainer");
 
         function rotateLinks() {
-            // Skry starý text a posuň ho hore
-            linkElement.style.opacity = 0;
-            linkElement.style.transform = "translateY(-30px)";
+            // Vytvoríme nový odkaz
+            const newLink = document.createElement("a");
+            newLink.href = urls[index].url;
+            newLink.textContent = urls[index].text;
+            newLink.target = "_blank";
+            newLink.classList.add("rotatingLink");
 
+            // Pridáme odkaz do kontajnera
+            linkContainer.appendChild(newLink);
+
+            // Spustíme animáciu (fade-in a posun do stredu)
             setTimeout(() => {
-                // Zmeň obsah a resetuj pozíciu
-                linkElement.href = urls[index].url;
-                linkElement.textContent = urls[index].text;
-                linkElement.style.transform = "translateY(30px)"; // Presunie nový text dole
+                newLink.style.opacity = "1";
+                newLink.style.transform = "translateY(0)";
+            }, 50);
 
-                setTimeout(() => {
-                    // Zobraz nový text a posuň ho späť
-                    linkElement.style.opacity = 1;
-                    linkElement.style.transform = "translateY(0)";
-                }, 50);
-            }, 500); // Čas fade-out efektu
+            // Odstránime starý odkaz po animácii
+            setTimeout(() => {
+                const oldLinks = document.querySelectorAll(".rotatingLink");
+                if (oldLinks.length > 1) {
+                    linkContainer.removeChild(oldLinks[0]);
+                }
+            }, 500);
 
+            // Posunieme index
             index = (index + 1) % urls.length;
         }
 
