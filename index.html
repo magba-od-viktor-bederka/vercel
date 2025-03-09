@@ -7,17 +7,12 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 50px 0;
         }
         .reference-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* Zarovnanie obsahu doľava */
-            gap: 15px;
-            width: 80%;
-            margin: 0 auto;
-            background: transparent;
+            position: absolute;
+            left: 0;
+            width: 100vw; /* Natiahne sa cez celú šírku */
         }
         .reference {
             font-size: 18px;
@@ -26,6 +21,7 @@
             text-decoration: none;
             transition: opacity 1s ease-in-out;
             opacity: 1;
+            padding-left: 10px; /* Malá medzera od okraja */
         }
         .hidden {
             opacity: 0;
@@ -48,7 +44,7 @@
             { name: "Zbierka máp a plánov Archívu Bratislavy", url: "https://data.bratislava.sk/pages/archiv-mesta-bratislava" }
         ];
 
-        let index = 1; // Oprava: začneme na druhom prvku, prvý už je nastavený
+        let index = 1;
         const refElement = document.getElementById("ref1");
 
         function rotateReferences() {
@@ -58,11 +54,11 @@
                 refElement.textContent = references[index].name;
                 refElement.href = references[index].url;
                 refElement.classList.remove("hidden");
-                index = (index + 1) % references.length; // Správne posunutie indexu
+                index = (index + 1) % references.length;
             }, 1000);
         }
 
-        // Inicializácia - prvý odkaz sa nastaví len raz
+        // Inicializácia
         refElement.textContent = references[0].name;
         refElement.href = references[0].url;
 
