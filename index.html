@@ -37,8 +37,19 @@
             position: absolute;
             text-align: left;
             width: auto; 
-            transform: translate3d(0, 0, 0);
-            transition: transform 0.8s ease-in-out;
+            transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+        }
+        .hidden {
+            transform: translateY(-40px); /* Nový text začne mimo viditeľnosti */
+            opacity: 0;
+        }
+        .visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .leaving {
+            transform: translateY(40px); /* Starý text odchádza dole */
+            opacity: 0;
         }
     </style>
 </head>
@@ -46,8 +57,8 @@
 
     <div class="title">DÁTOVÝ PORTÁL</div>
     <div class="subtitle-container">
-        <div id="subtitle1" class="subtitle">Hlavného mesta SR Bratislavy</div>
-        <div id="subtitle2" class="subtitle" style="transform: translate3d(0, 40px, 0); opacity: 0;"></div>
+        <div id="subtitle1" class="subtitle visible">Hlavného mesta SR Bratislavy</div>
+        <div id="subtitle2" class="subtitle hidden"></div>
     </div>
 
     <script>
@@ -65,19 +76,33 @@
         function rotateSubtitle() {
             const nextIndex = (index + 1) % subtitles.length;
 
-            // Nastaviť text v skrytom elemente
-            if (subtitle1.style.transform === "translate3d(0px, 0px, 0px)") {
+            if (subtitle1.classList.contains("visible")) {
+                // Nový text prichádza zhora
                 subtitle2.textContent = subtitles[nextIndex];
-                subtitle2.style.transform = "translate3d(0px, 0px, 0px)";
-                subtitle2.style.opacity = "1";
-                subtitle1.style.transform = "translate3d(0px, -40px, 0px)";
-                subtitle1.style.opacity = "0";
+                subtitle2.classList.remove("hidden");
+                subtitle2.classList.add("visible");
+
+                // Starý text odchádza dole
+                subtitle1.classList.remove("visible");
+                subtitle1.classList.add("leaving");
+
+                // Po animácii odstránime triedu leaving a skryjeme
+                setTimeout(() => {
+                    subtitle1.classList.remove("leaving");
+                    subtitle1.classList.add("hidden");
+                }, 800);
             } else {
                 subtitle1.textContent = subtitles[nextIndex];
-                subtitle1.style.transform = "translate3d(0px, 0px, 0px)";
-                subtitle1.style.opacity = "1";
-                subtitle2.style.transform = "translate3d(0px, -40px, 0px)";
-                subtitle2.style.opacity = "0";
+                subtitle1.classList.remove("hidden");
+                subtitle1.classList.add("visible");
+
+                subtitle2.classList.remove("visible");
+                subtitle2.classList.add("leaving");
+
+                setTimeout(() => {
+                    subtitle2.classList.remove("leaving");
+                    subtitle2.classList.add("hidden");
+                }, 800);
             }
 
             index = nextIndex;
