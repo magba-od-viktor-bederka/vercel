@@ -9,37 +9,47 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 0;
+            padding: 20px;
         }
-        iframe {
-            width: 80%;
-            height: 500px;
-            border: none;
+        #linkContainer {
+            font-size: 20px;
             margin-top: 20px;
+        }
+        #rotatingLink {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+        #rotatingLink:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
     <h2>Rotujúce Odkazy</h2>
-    <iframe id="contentFrame" src=""></iframe>
+    <div id="linkContainer">
+        <a id="rotatingLink" href="#" target="_blank">Načítavam...</a>
+    </div>
 
     <script>
         const urls = [
-            "https://data.bratislava.sk/pages/doprava-a-komunikacie",
-            "https://data.bratislava.sk/pages/zivotne-prostredie",
-            "https://data.bratislava.sk/pages/vzdelavanie-a-sport"
+            { url: "https://data.bratislava.sk/pages/doprava-a-komunikacie", text: "Doprava a komunikácie" },
+            { url: "https://data.bratislava.sk/pages/zivotne-prostredie", text: "Životné prostredie" },
+            { url: "https://data.bratislava.sk/pages/vzdelavanie-a-sport", text: "Vzdelávanie a šport" }
         ];
 
         let index = 0;
 
         function rotateLinks() {
-            document.getElementById("contentFrame").src = urls[index];
+            const linkElement = document.getElementById("rotatingLink");
+            linkElement.href = urls[index].url;
+            linkElement.textContent = urls[index].text;
             index = (index + 1) % urls.length;
         }
 
         // Inicializácia
         rotateLinks();
-        setInterval(rotateLinks, 5000); // Každých 5 sekúnd sa zmení iframe
+        setInterval(rotateLinks, 5000); // Každých 5 sekúnd sa zmení odkaz
     </script>
 </body>
 </html>
