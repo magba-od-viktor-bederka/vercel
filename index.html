@@ -60,4 +60,17 @@
 
                 setTimeout(() => {
                     // Zobraz nový text a posuň ho späť
-                    linkElement.style.opa
+                    linkElement.style.opacity = 1;
+                    linkElement.style.transform = "translateY(0)";
+                }, 50);
+            }, 500); // Čas fade-out efektu
+
+            index = (index + 1) % urls.length;
+        }
+
+        // Inicializácia
+        rotateLinks();
+        setInterval(rotateLinks, 5000); // Každých 5 sekúnd sa zmení odkaz
+    </script>
+</body>
+</html>
