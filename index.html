@@ -10,7 +10,7 @@
             text-align: center;
             margin: 0;
             padding: 20px;
-            background-color: #fff;
+            background: transparent; /* Priesvitné pozadie */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,13 +18,13 @@
         }
         #linkContainer {
             font-size: 24px;
-            height: 40px; /* Zafixovaná výška, aby sa nešklbalo */
+            height: 40px; /* Fixná výška riadku */
+            width: auto; /* Šírka podľa textu */
             overflow: hidden;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;
         }
         #rotatingLink {
             text-decoration: none;
@@ -35,7 +35,8 @@
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.5s ease, transform 0.5s ease;
-            white-space: nowrap; /* Zabezpečí, že sa text nezlomí na nový riadok */
+            background: transparent; /* Priesvitné pozadie */
+            padding: 5px 10px; /* Padding len na lepšiu čitateľnosť */
         }
     </style>
 </head>
