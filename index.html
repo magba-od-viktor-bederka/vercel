@@ -3,66 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotujúce Referencie</title>
+    <title>Rotujúci Nadpis</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 50px 0;
+            text-align: center;
         }
-        .reference-container {
+        .title {
+            font-size: 44px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; 
+            overflow: hidden;
+            position: relative;
+            width: 100%; 
+            padding-left: 10px; 
+        }
+        .subtitle-container {
+            height: 42px; /* Fixná výška kontajnera */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start; 
+            overflow: hidden;
+            position: relative;
+            width: 100%; 
+            padding-left: 10px; 
+        }
+        .subtitle {
+            font-size: 28px;
+            font-weight: normal;
             position: absolute;
-            left: 0;
-            width: 100vw; /* Natiahne sa cez celú šírku */
+            transition: transform 0.8s ease-in-out;
+            text-align: left;
+            width: auto; 
         }
-        .reference {
-            font-size: 18px;
-            color: black;
-            cursor: pointer;
-            text-decoration: none;
-            transition: opacity 1s ease-in-out;
-            opacity: 1;
-            padding-left: 10px; /* Malá medzera od okraja */
-        }
-        .hidden {
-            opacity: 0;
-        }
-        .reference:hover {
-            color: black;
-            text-decoration: underline;
-        }
+
     </style>
 </head>
 <body>
-    <div class="reference-container">
-        <a id="ref1" class="reference" href="#" target="_blank"></a>
+
+    <div class="title">DÁTOVÝ PORTÁL</div>
+    <div class="subtitle-container">
+        <div id="subtitle" class="subtitle">Hlavného mesta SR Bratislavy</div>
     </div>
 
     <script>
-        const references = [
-            { name: "Technická mapa mesta na stiahnutie", url: "https://data.bratislava.sk/pages/vystupy-dtm" },
-            { name: "Rozpočet mesta v grafoch", url: "https://data.bratislava.sk/pages/rozpocet-mesta" },
-            { name: "Zbierka máp a plánov Archívu Bratislavy", url: "https://data.bratislava.sk/pages/archiv-mesta-bratislava" }
+        const subtitles = [
+            "Hlavného mesta SR Bratislavy",
+            "Otvorené údaje",
+            "Vizualizácie",
+            "Mapové aplikácie"
         ];
 
-        let index = 1;
-        const refElement = document.getElementById("ref1");
+        let index = 0;
+        const subtitleElement = document.getElementById("subtitle");
 
-        function rotateReferences() {
-            refElement.classList.add("hidden");
+        function rotateSubtitle() {
+            const nextIndex = (index + 1) % subtitles.length;
 
-            setTimeout(() => {
-                refElement.textContent = references[index].name;
-                refElement.href = references[index].url;
-                refElement.classList.remove("hidden");
-                index = (index + 1) % references.length;
-            }, 1000);
+            subtitleElement.style.transform = "translateY(+40px)";
+            
+            setTimeout(() => { 
+                subtitleElement.textContent = subtitles[nextIndex];
+                subtitleElement.style.transform = "translateY(0)";
+                index = nextIndex;
+            }, 800); 
         }
 
-        // Inicializácia
-        refElement.textContent = references[0].name;
-        refElement.href = references[0].url;
-
-        setInterval(rotateReferences, 5000);
+        setInterval(rotateSubtitle, 5000);
     </script>
+
 </body>
 </html>
