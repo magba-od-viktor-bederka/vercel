@@ -47,4 +47,40 @@
     <div class="title">DÁTOVÝ PORTÁL</div>
     <div class="subtitle-container">
         <div id="subtitle1" class="subtitle">Hlavného mesta SR Bratislavy</div>
-        <div id="
+        <div id="subtitle2" class="subtitle" style="opacity: 0;">Otvorené údaje</div>
+    </div>
+
+    <script>
+        const subtitles = [
+            "Hlavného mesta SR Bratislavy",
+            "Otvorené údaje",
+            "Vizualizácie",
+            "Mapové aplikácie"
+        ];
+
+        let index = 0;
+        const subtitle1 = document.getElementById("subtitle1");
+        const subtitle2 = document.getElementById("subtitle2");
+
+        function rotateSubtitle() {
+            const nextIndex = (index + 1) % subtitles.length;
+            
+            // Striedavo meníme viditeľnosť elementov
+            if (subtitle1.style.opacity == "1") {
+                subtitle2.textContent = subtitles[nextIndex];
+                subtitle2.style.opacity = "1";
+                subtitle1.style.opacity = "0";
+            } else {
+                subtitle1.textContent = subtitles[nextIndex];
+                subtitle1.style.opacity = "1";
+                subtitle2.style.opacity = "0";
+            }
+
+            index = nextIndex;
+        }
+
+        setInterval(rotateSubtitle, 5000);
+    </script>
+
+</body>
+</html>
