@@ -3,43 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotujúce Odkazy</title>
+    <title>Rotujúce Referencie</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 0;
-            padding: 0;
+            margin: 50px 0;
         }
-        iframe {
+        .reference-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Zarovnanie obsahu doľava */
+            gap: 15px;
             width: 80%;
-            height: 500px;
-            border: none;
-            margin-top: 20px;
+            margin: 0 auto;
+            background: transparent;
+        }
+        .reference {
+            font-size: 18px;
+            color: black;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 1s ease-in-out;
+            opacity: 1;
+        }
+        .hidden {
+            opacity: 0;
+        }
+        .reference:hover {
+            color: black;
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h2>Rotujúce Odkazy</h2>
-    <iframe id="contentFrame" src=""></iframe>
+    <div class="reference-container">
+        <a id="ref1" class="reference" href="#" target="_blank"></a>
+    </div>
 
     <script>
-        const urls = [
-            "https://example.com/page1",
-            "https://example.com/page2",
-            "https://example.com/page3"
+        const references = [
+            { name: "Technická mapa mesta na stiahnutie", url: "https://data.bratislava.sk/pages/vystupy-dtm" },
+            { name: "Rozpočet mesta v grafoch", url: "https://data.bratislava.sk/pages/rozpocet-mesta" },
+            { name: "Zbierka máp a plánov Archívu Bratislavy", url: "https://data.bratislava.sk/pages/archiv-mesta-bratislava" }
         ];
 
-        let index = 0;
+        let index = 1; // Oprava: začneme na druhom prvku, prvý už je nastavený
+        const refElement = document.getElementById("ref1");
 
-        function rotateLinks() {
-            document.getElementById("contentFrame").src = urls[index];
-            index = (index + 1) % urls.length;
+        function rotateReferences() {
+            refElement.classList.add("hidden");
+
+            setTimeout(() => {
+                refElement.textContent = references[index].name;
+                refElement.href = references[index].url;
+                refElement.classList.remove("hidden");
+                index = (index + 1) % references.length; // Správne posunutie indexu
+            }, 1000);
         }
 
-        // Inicializácia
-        rotateLinks();
-        setInterval(rotateLinks, 5000); // Každých 5 sekúnd sa zmení iframe
+        // Inicializácia - prvý odkaz sa nastaví len raz
+        refElement.textContent = references[0].name;
+        refElement.href = references[0].url;
+
+        setInterval(rotateReferences, 5000);
     </script>
 </body>
 </html>
