@@ -11,13 +11,20 @@
             margin: 0;
             padding: 20px;
             background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         #linkContainer {
             font-size: 24px;
-            margin-top: 20px;
             height: 40px; /* Zafixovaná výška, aby sa nešklbalo */
             overflow: hidden;
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         #rotatingLink {
             text-decoration: none;
@@ -25,10 +32,10 @@
             font-weight: bold;
             display: inline-block;
             position: absolute;
-            width: 100%;
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 0.5s ease, transform 0.5s ease;
+            white-space: nowrap; /* Zabezpečí, že sa text nezlomí na nový riadok */
         }
     </style>
 </head>
