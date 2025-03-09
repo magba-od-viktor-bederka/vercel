@@ -35,10 +35,10 @@
             font-size: 28px;
             font-weight: normal;
             position: absolute;
-            transition: opacity 0.8s ease-in-out;
             text-align: left;
-            width: auto;
-            opacity: 1;
+            width: auto; 
+            transform: translate3d(0, 0, 0);
+            transition: transform 0.8s ease-in-out;
         }
     </style>
 </head>
@@ -47,7 +47,7 @@
     <div class="title">DÁTOVÝ PORTÁL</div>
     <div class="subtitle-container">
         <div id="subtitle1" class="subtitle">Hlavného mesta SR Bratislavy</div>
-        <div id="subtitle2" class="subtitle" style="opacity: 0;">Otvorené údaje</div>
+        <div id="subtitle2" class="subtitle" style="transform: translate3d(0, 40px, 0); opacity: 0;"></div>
     </div>
 
     <script>
@@ -64,15 +64,19 @@
 
         function rotateSubtitle() {
             const nextIndex = (index + 1) % subtitles.length;
-            
-            // Striedavo meníme viditeľnosť elementov
-            if (subtitle1.style.opacity == "1") {
+
+            // Nastaviť text v skrytom elemente
+            if (subtitle1.style.transform === "translate3d(0px, 0px, 0px)") {
                 subtitle2.textContent = subtitles[nextIndex];
+                subtitle2.style.transform = "translate3d(0px, 0px, 0px)";
                 subtitle2.style.opacity = "1";
+                subtitle1.style.transform = "translate3d(0px, -40px, 0px)";
                 subtitle1.style.opacity = "0";
             } else {
                 subtitle1.textContent = subtitles[nextIndex];
+                subtitle1.style.transform = "translate3d(0px, 0px, 0px)";
                 subtitle1.style.opacity = "1";
+                subtitle2.style.transform = "translate3d(0px, -40px, 0px)";
                 subtitle2.style.opacity = "0";
             }
 
