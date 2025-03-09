@@ -22,7 +22,7 @@
             padding-left: 10px; 
         }
         .subtitle-container {
-            height: 42px; /* Fixná výška kontajnera */
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: flex-start; 
@@ -35,45 +35,16 @@
             font-size: 28px;
             font-weight: normal;
             position: absolute;
-            transition: transform 0.8s ease-in-out;
+            transition: opacity 0.8s ease-in-out;
             text-align: left;
-            width: auto; 
+            width: auto;
+            opacity: 1;
         }
-
     </style>
 </head>
 <body>
 
     <div class="title">DÁTOVÝ PORTÁL</div>
     <div class="subtitle-container">
-        <div id="subtitle" class="subtitle">Hlavného mesta SR Bratislavy</div>
-    </div>
-
-    <script>
-        const subtitles = [
-            "Hlavného mesta SR Bratislavy",
-            "Otvorené údaje",
-            "Vizualizácie",
-            "Mapové aplikácie"
-        ];
-
-        let index = 0;
-        const subtitleElement = document.getElementById("subtitle");
-
-        function rotateSubtitle() {
-            const nextIndex = (index + 1) % subtitles.length;
-
-            subtitleElement.style.transform = "translateY(+40px)";
-            
-            setTimeout(() => { 
-                subtitleElement.textContent = subtitles[nextIndex];
-                subtitleElement.style.transform = "translateY(0)";
-                index = nextIndex;
-            }, 800); 
-        }
-
-        setInterval(rotateSubtitle, 5000);
-    </script>
-
-</body>
-</html>
+        <div id="subtitle1" class="subtitle">Hlavného mesta SR Bratislavy</div>
+        <div id="
