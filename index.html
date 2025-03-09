@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rotujúce Odkazy</title>
+    <title>data.bratislava/widget</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,26 +16,6 @@
             align-items: center;
             height: 100vh;
         }
-        #linkContainer {
-            font-size: 24px;
-            height: 40px; /* Výška riadku */
-            width: auto; /* Šírka podľa textu */
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .rotatingLink {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            position: absolute;
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
     </style>
 </head>
 <body>
@@ -43,49 +23,5 @@
     <div id="linkContainer">
         <a id="rotatingLink" href="#" target="_blank" class="rotatingLink">Načítavam...</a>
     </div>
-
-    <script>
-        const urls = [
-            { url: "https://data.bratislava.sk/pages/doprava-a-komunikacie", text: "Doprava a komunikácie" },
-            { url: "https://data.bratislava.sk/pages/zivotne-prostredie", text: "Životné prostredie" },
-            { url: "https://data.bratislava.sk/pages/vzdelavanie-a-sport", text: "Vzdelávanie a šport" }
-        ];
-
-        let index = 0;
-        const linkContainer = document.getElementById("linkContainer");
-
-        function rotateLinks() {
-            // Vytvoríme nový odkaz
-            const newLink = document.createElement("a");
-            newLink.href = urls[index].url;
-            newLink.textContent = urls[index].text;
-            newLink.target = "_blank";
-            newLink.classList.add("rotatingLink");
-
-            // Pridáme odkaz do kontajnera
-            linkContainer.appendChild(newLink);
-
-            // Spustíme animáciu (fade-in a posun do stredu)
-            setTimeout(() => {
-                newLink.style.opacity = "1";
-                newLink.style.transform = "translateY(0)";
-            }, 50);
-
-            // Odstránime starý odkaz po animácii
-            setTimeout(() => {
-                const oldLinks = document.querySelectorAll(".rotatingLink");
-                if (oldLinks.length > 1) {
-                    linkContainer.removeChild(oldLinks[0]);
-                }
-            }, 500);
-
-            // Posunieme index
-            index = (index + 1) % urls.length;
-        }
-
-        // Inicializácia
-        rotateLinks();
-        setInterval(rotateLinks, 5000); // Každých 5 sekúnd sa zmení odkaz
-    </script>
 </body>
 </html>
