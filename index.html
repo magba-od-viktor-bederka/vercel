@@ -8,62 +8,38 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background: transparent;
+            margin: 0;
+            padding: 0;
         }
-        #linkContainer {
-            font-size: 24px;
-            height: 40px;
-            width: auto;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .rotatingLink {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+        iframe {
+            width: 80%;
+            height: 500px;
+            border: none;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div id="linkContainer">
-        <a id="rotatingLink" href="#" target="_blank">Načítavam...</a>
-    </div>
+    <h2>Rotujúce Odkazy</h2>
+    <iframe id="contentFrame" src=""></iframe>
 
     <script>
         const urls = [
-            { url: "https://data.bratislava.sk/pages/doprava-a-komunikacie", text: "Doprava a komunikácie" },
-            { url: "https://data.bratislava.sk/pages/zivotne-prostredie", text: "Životné prostredie" },
-            { url: "https://data.bratislava.sk/pages/vzdelavanie-a-sport", text: "Vzdelávanie a šport" }
+            "https://example.com/page1",
+            "https://example.com/page2",
+            "https://example.com/page3"
         ];
 
         let index = 0;
-        const linkElement = document.getElementById("rotatingLink");
 
         function rotateLinks() {
-            linkElement.style.opacity = 0;
-            linkElement.style.transform = "translateY(-30px)";
-
-            setTimeout(() => {
-                linkElement.href = urls[index].url;
-                linkElement.textContent = urls[index].text;
-                linkElement.style.transform = "translateY(30px)";
-
-                setTimeout(() => {
-                    linkElement.style.opacity = 1;
-                    linkElement.style.transform = "translateY(0)";
-                }, 50);
-            }, 500);
-
+            document.getElementById("contentFrame").src = urls[index];
             index = (index + 1) % urls.length;
         }
 
+        // Inicializácia
         rotateLinks();
-        setInterval(rotateLinks, 5000);
+        setInterval(rotateLinks, 5000); // Každých 5 sekúnd sa zmení iframe
     </script>
 </body>
 </html>
